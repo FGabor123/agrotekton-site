@@ -49,3 +49,5 @@ jobs:
           git add -A
           git commit -m 'Install full-quality hero image'
           git push
+
+# retry after all seven image chunks are present
