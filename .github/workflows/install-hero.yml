@@ -1,0 +1,51 @@
+name: Install full-quality hero
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-hero.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct hero image
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d .hero-upload
+          cat .hero-upload/part0.txt .hero-upload/part1.txt .hero-upload/part2.txt .hero-upload/part3.txt .hero-upload/part4.txt .hero-upload/part5.txt .hero-upload/part6.txt | base64 -d > images/hero-final.webp
+          SIZE=$(stat -c%s images/hero-final.webp)
+          echo "hero size: $SIZE bytes"
+          test "$SIZE" -eq 72878
+
+      - name: Point CSS to final hero
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i "s#images/hero-v2.jpg#images/hero-final.webp#g" styles.css
+          grep -q "images/hero-final.webp" styles.css
+
+      - name: Remove staging files and workflow
+        shell: bash
+        run: |
+          rm -rf .hero-upload
+          rm -f .github/workflows/install-hero.yml
+
+      - name: Commit final hero
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Install full-quality hero image'
+          git push
