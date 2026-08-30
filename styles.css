@@ -37,7 +37,7 @@
     .menu{display:none;border:0;background:transparent;font-size:28px;line-height:1}
 
     section{padding:96px 0}
-    .hero{position:relative;min-height:864px;padding:0;background-image:url('images/hero.jpg');background-size:cover;background-position:center center;color:#fff;display:flex;align-items:stretch}
+    .hero{position:relative;min-height:864px;padding:0;background-image:url('images/hero-v2.jpg');background-size:cover;background-position:center center;color:#fff;display:flex;align-items:stretch}
     .hero:before{content:"";position:absolute;inset:0;background:rgba(5,24,7,.42);z-index:0}
     .hero>.container{position:relative;z-index:1;width:min(1470px,calc(100% - 64px));max-width:none;padding-top:315px;padding-left:47px;padding-bottom:105px}
     .hero-grid{display:block}
@@ -101,6 +101,7 @@
     .person-body p{margin:0 0 20px;color:var(--text);font-size:18px}
     .linkedin{position:static;width:40px;height:40px;border-radius:50%;display:inline-grid;place-items:center;background:transparent;border:1px solid #7d8794;font-weight:800;color:#485261;font-size:18px;text-decoration:none}
 
+    /* Contact/footer intentionally follows the simpler static version. */
     .contact{background:#17251b;color:white}
     .contact-grid{display:grid;grid-template-columns:1fr .9fr;gap:70px;align-items:start}
     .contact .lead{color:#c8d4ca}
